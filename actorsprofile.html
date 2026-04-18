@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en" x-data="studioApp()" :class="{ 'dark': darkMode }" :dir="isRtl ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" 
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c3aed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'></path><path d='M19 10v2a7 7 0 0 1-14 0v-2'></path><line x1='12' x2='12' y1='19' y2='22'></line></svg>">
+    <title>SonicNarrate | Purple Studio Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Inter', sans-serif; font-weight: 400; }
+        .waveform-bar {
+            animation: wave 1.2s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 45px; }
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f3e8ff; }
+        ::-webkit-scrollbar-thumb { background: #9333ea; border-radius: 10px; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Deep Purple Palette
+                        primary: '#7c3aed',    /* Violet 600 */
+                        secondary: '#4c1d95',  /* Violet 900 */
+                        accent: '#c026d3',     /* Fuchsia 600 */
+                        surface: '#faf5ff'     /* Purple 50 */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface dark:bg-slate-950 text-slate-900 dark:text-purple-50 transition-colors duration-300">
+
+     <nav class="fixed w-full z-50 bg-white/95 dark:bg-slate-950/95 border-b border-purple-100 dark:border-purple-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20 items-center">
+    <a href="index.html">
+         <div class="flex-shrink-0 flex items-center gap-2 group cursor-pointer mr-2 lg:mr-4">
+        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+            <i data-lucide="mic-2" class="w-5 h-5"></i>
+        </div>
+       <span class="text-xl lg:text-2xl font-bold tracking-tight text-primary dark:text-white whitespace-nowrap opacity-100">
+                SonicNarrate
+            </span>
+    </div>
+    </a>
+   
+
+   <div class="hidden lg:flex items-center space-x-4 xl:space-x-8" 
+     x-data="{ activePath: window.location.pathname }">
+    
+    <a href="index.html" 
+       :class="activePath.includes('index.html') || activePath === '/' ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base group">
+        Home
+        <span :class="activePath.includes('index.html') || activePath === '/' ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+
+    <a href="home2.html" 
+       :class="activePath.includes('home2.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base group">
+        Home2
+        <span :class="activePath.includes('home2.html') ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+
+    <a href="about.html" 
+       :class="activePath.includes('about.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base group">
+        About
+        <span :class="activePath.includes('about.html') ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+
+    <a href="service.html" 
+       :class="activePath.includes('service.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base group">
+        Service
+        <span :class="activePath.includes('service.html') ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+
+    <a href="actorsprofile.html" 
+       :class="activePath.includes('actorsprofile.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base whitespace-nowrap group">
+        Actors Profile
+        <span :class="activePath.includes('actorsprofile.html') ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+
+    <a href="contact.html" 
+       :class="activePath.includes('contact.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+       class="relative py-2 hover:text-primary font-medium transition-colors text-sm xl:text-base group">
+        Contact
+        <span :class="activePath.includes('contact.html') ? 'scale-x-100' : 'scale-x-0'" 
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+    </a>
+    
+    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+        <button class="flex items-center gap-1 hover:text-primary font-medium transition-colors text-sm xl:text-base">
+            Dashboard <i data-lucide="chevron-down" class="w-4 h-4"></i>
+        </button>
+        <div x-show="open" x-cloak 
+             x-transition:enter="transition ease-out duration-100"
+             class="absolute top-full left-0 mt-0 w-48 bg-white dark:bg-slate-900 border border-purple-100 dark:border-purple-900 shadow-xl rounded-xl py-2 overflow-hidden">
+            <a href="user.html" class="flex items-center gap-2 px-4 py-3 hover:bg-purple-50 dark:hover:bg-purple-900/40 transition-colors">
+                <i data-lucide="user" class="w-4 h-4"></i> User Panel
+            </a>
+        
+        </div>
+    </div>
+</div>
+
+    <div class="hidden lg:flex items-center space-x-2 xl:space-x-4">
+        <div class="flex items-center bg-purple-50 dark:bg-purple-900/20 rounded-lg p-1">
+            <button @click="toggleRtl()" class="p-1.5 px-2 text-[10px] font-black uppercase hover:text-primary transition-colors">
+                <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
+            </button>
+            <div class="w-[1px] h-4 bg-purple-200 dark:bg-purple-800 mx-1"></div>
+            <button @click="toggleDark()" class="p-1.5 transition-all">
+                <i x-show="!darkMode" data-lucide="moon" class="w-4 h-4 text-secondary"></i>
+                <i x-show="darkMode" data-lucide="sun" class="w-4 h-4 text-yellow-400"></i>
+            </button>
+        </div>
+
+        <a href="login.html" class="text-secondary dark:text-purple-300 font-semibold px-2 text-sm xl:text-base">Login</a>
+        <a href="uploadvoice.html" class="bg-primary text-white px-4 xl:px-6 py-2.5 xl:py-3 rounded-xl font-semibold hover:bg-secondary shadow-lg shadow-primary/25 transition-all active:scale-95 text-sm xl:text-base whitespace-nowrap">
+            Upload Voice
+        </a>
+    </div>
+
+    <div class="lg:hidden flex items-center gap-3">
+        <button @click="toggleDark()" class="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30">
+            <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
+            <i x-show="darkMode" data-lucide="sun" class="w-5 h-5"></i>
+        </button>
+        <button @click="mobileMenu = !mobileMenu" class="p-2 text-primary">
+            <i data-lucide="menu" x-show="!mobileMenu" class="w-8 h-8"></i>
+            <i data-lucide="x" x-show="mobileMenu" x-cloak class="w-8 h-8"></i>
+        </button>
+    </div>
+</div>
+        </div>
+
+        <div x-show="mobileMenu" x-cloak 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="-translate-y-4 opacity-0"
+             x-transition:enter-end="translate-y-0 opacity-100"
+             class="lg:hidden bg-white dark:bg-slate-950 border-t border-purple-100 dark:border-purple-900 p-6 space-y-4 shadow-2xl">
+           <div class="grid grid-cols-2 gap-4" x-data="{ activePath: window.location.pathname }">
+    <a href="index.html" 
+       :class="(activePath.includes('index.html') || activePath === '/') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       Home
+    </a>
+
+    <a href="home2.html" 
+       :class="activePath.includes('home2.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       Home2
+    </a>
+
+    <a href="about.html" 
+       :class="activePath.includes('about.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       About
+    </a>
+
+    <a href="service.html" 
+       :class="activePath.includes('service.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       Service
+    </a>
+
+    <a href="actorsprofile.html" 
+       :class="activePath.includes('actorsprofile.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       Actors
+    </a>
+
+    <a href="contact.html" 
+       :class="activePath.includes('contact.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       class="p-3 rounded-lg font-medium transition-all duration-300">
+       Contact
+    </a>
+</div>
+            
+            <div x-data="{ dOpen: false }" class="border-y border-purple-100 dark:border-purple-900 py-2">
+                <button @click="dOpen = !dOpen" class="w-full flex justify-between items-center py-2 font-bold text-primary">
+                    Dashboard Panels <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </button>
+                <div x-show="dOpen" class="grid grid-cols-1 gap-2 pt-2 pb-4">
+                    <a href="user.html" class="pl-4 py-2 border-l-2 border-primary">User Dashboard</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4 pt-2">
+                <button @click="toggleRtl()" class="w-full py-3 border border-purple-200 dark:border-purple-800 rounded-xl font-bold uppercase tracking-widest text-sm">
+                    Switch to <span x-text="isRtl ? 'LTR' : 'RTL'"></span> Layout
+                </button>
+                <div class="flex gap-2">
+                    <a href="login.html" class="flex-1 text-center py-4 font-bold border-2 border-primary rounded-xl text-primary">Login</a>
+                    <a href="uploadvoice.html" class="flex-[2] text-center py-4 font-bold bg-primary text-white rounded-xl shadow-lg shadow-primary/30">Upload Voice</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<section class="relative py-20 lg:py-32 bg-white dark:bg-slate-950 overflow-hidden" x-data="{ isPlaying: false }">
+    <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            
+            <div class="w-full lg:w-1/2 relative">
+                <div class="relative group">
+                    <div class="absolute -inset-4 border-2 border-purple-100 dark:border-purple-900/30 rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
+                    
+                    <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] lg:aspect-square bg-slate-200 dark:bg-slate-800">
+                        <img src="assets/voiceactors1" 
+                             alt="John Doe - Voice Actor" 
+                             class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        
+                        <div class="absolute bottom-6 left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl border border-white/20">
+                            <div class="flex items-center gap-4">
+                                <div class="text-primary font-black text-3xl">5+</div>
+                                <div class="text-[10px] uppercase font-black tracking-widest leading-tight text-slate-500">Years of<br>Excellence</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 space-y-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-accent font-black text-sm uppercase tracking-[0.2em]">
+                        <span class="w-8 h-px bg-accent"></span> Professional Voice Artist
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-secondary dark:text-white leading-tight">
+                        John Doe
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-600 dark:text-purple-200/70 font-medium italic">
+                        “Warm, cinematic voice for audiobooks & commercials”
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-6 py-6 border-y border-purple-100 dark:border-purple-900/30">
+                    <div class="flex items-center gap-3">
+                        <div class="flex text-primary">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <span class="text-sm font-bold text-secondary dark:text-white">5.0 Rating</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-primary"></i>
+                        <span class="text-sm font-bold text-slate-500">200+ Projects Completed</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                    <button @click="isPlaying = !isPlaying" 
+                            class="w-full sm:w-auto px-8 py-5 bg-primary text-white font-black rounded-2xl flex items-center justify-center gap-4 hover:bg-secondary transition-all shadow-xl shadow-primary/20 active:scale-95 group">
+                        <div class="relative">
+                           <i x-show="!isPlaying" data-lucide="play" class="w-6 h-6 fill-current"></i>
+                           <i x-show="isPlaying" data-lucide="pause" class="w-6 h-6 fill-current" x-cloak></i>
+                        </div>
+                        <span x-text="isPlaying ? 'Playing Sample...' : 'Play Demo'"></span>
+                        
+                        <div x-show="isPlaying" class="flex gap-1 items-end h-4" x-cloak>
+                            <span class="w-1 h-full bg-white rounded-full animate-bounce"></span>
+                            <span class="w-1 h-2/3 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                            <span class="w-1 h-full bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                        </div>
+                    </button>
+
+                    <a href="contact.html" 
+                       class="w-full sm:w-auto px-8 py-5 bg-white dark:bg-slate-900 text-secondary dark:text-white font-black rounded-2xl border-2 border-purple-100 dark:border-purple-800 hover:border-primary transition-all flex items-center justify-center gap-3 group">
+                        Book Now
+                        <i data-lucide="calendar-days" class="w-5 h-5 group-hover:text-primary transition-colors"></i>
+                    </a>
+                </div>
+
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-2">
+                    Trusted by brands like: Spotify, Audible, and Netflix
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize icons
+    lucide.createIcons();
+</script>
+<section class="py-24 bg-surface dark:bg-slate-950" x-data="{ activeTrack: null }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div class="space-y-4">
+                <h2 class="text-3xl md:text-5xl font-black text-secondary dark:text-white">Voice <span class="text-primary">Demos</span></h2>
+                <p class="text-slate-500 dark:text-purple-200/50 max-w-md">Listen to my range across different genres and find the perfect tone for your project.</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-4 py-2 rounded-full">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Studio Quality: 48kHz / 24-bit
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            
+            <div @click="activeTrack = activeTrack === 1 ? null : 1" 
+                 class="group relative bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[2.5rem] border-2 border-transparent transition-all duration-500 cursor-pointer overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/5"
+                 :class="activeTrack === 1 ? 'border-primary shadow-primary/10' : 'hover:border-purple-100 dark:hover:border-purple-900/40'">
+                
+                <div class="flex items-center gap-6 relative z-10">
+                    <div class="relative flex-shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-105">
+                            <i x-show="activeTrack !== 1" data-lucide="play" class="w-6 h-6 fill-current"></i>
+                            <i x-show="activeTrack === 1" data-lucide="pause" class="w-6 h-6 fill-current" x-cloak></i>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-primary">02:45</span>
+                            <span class="px-3 py-1 bg-surface dark:bg-purple-900/30 rounded-full text-[10px] font-bold text-slate-500 dark:text-purple-200 uppercase tracking-tighter">Calm / Narrative</span>
+                        </div>
+                        <h3 class="text-xl font-black text-secondary dark:text-white">Audiobook Narration</h3>
+                        
+                        <div class="flex items-end gap-[3px] h-8 pt-2">
+                            <template x-for="i in 30">
+                                <div class="bg-primary/20 w-1 rounded-full transition-all duration-500"
+                                     :class="activeTrack === 1 ? 'animate-waveform bg-primary' : 'h-1'"
+                                     :style="`height: ${activeTrack === 1 ? Math.random() * 100 + 20 : 10}%; animation-delay: ${i * 0.05}s`">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @click="activeTrack = activeTrack === 2 ? null : 2" 
+                 class="group relative bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[2.5rem] border-2 border-transparent transition-all duration-500 cursor-pointer overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/5"
+                 :class="activeTrack === 2 ? 'border-primary shadow-primary/10' : 'hover:border-purple-100 dark:hover:border-purple-900/40'">
+                
+                <div class="flex items-center gap-6 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-105">
+                        <i x-show="activeTrack !== 2" data-lucide="play" class="w-6 h-6 fill-current"></i>
+                        <i x-show="activeTrack === 2" data-lucide="pause" class="w-6 h-6 fill-current" x-cloak></i>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-primary">00:45</span>
+                            <span class="px-3 py-1 bg-surface dark:bg-purple-900/30 rounded-full text-[10px] font-bold text-slate-500 dark:text-purple-200 uppercase tracking-tighter">Energetic / Bold</span>
+                        </div>
+                        <h3 class="text-xl font-black text-secondary dark:text-white">Commercial Voice</h3>
+                        <div class="flex items-end gap-[3px] h-8 pt-2">
+                            <template x-for="i in 30">
+                                <div class="bg-primary/20 w-1 rounded-full transition-all duration-500"
+                                     :class="activeTrack === 2 ? 'animate-waveform bg-primary' : 'h-1'"
+                                     :style="`height: ${activeTrack === 2 ? Math.random() * 100 + 20 : 10}%; animation-delay: ${i * 0.05}s`">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @click="activeTrack = activeTrack === 3 ? null : 3" 
+                 class="group relative bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[2.5rem] border-2 border-transparent transition-all duration-500 cursor-pointer overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/5"
+                 :class="activeTrack === 3 ? 'border-primary shadow-primary/10' : 'hover:border-purple-100 dark:hover:border-purple-900/40'">
+                
+                <div class="flex items-center gap-6 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-105">
+                        <i x-show="activeTrack !== 3" data-lucide="play" class="w-6 h-6 fill-current"></i>
+                        <i x-show="activeTrack === 3" data-lucide="pause" class="w-6 h-6 fill-current" x-cloak></i>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-primary">01:15</span>
+                            <span class="px-3 py-1 bg-surface dark:bg-purple-900/30 rounded-full text-[10px] font-bold text-slate-500 dark:text-purple-200 uppercase tracking-tighter">Versatile / Fun</span>
+                        </div>
+                        <h3 class="text-xl font-black text-secondary dark:text-white">Character Voices</h3>
+                        <div class="flex items-end gap-[3px] h-8 pt-2">
+                            <template x-for="i in 30">
+                                <div class="bg-primary/20 w-1 rounded-full transition-all duration-500"
+                                     :class="activeTrack === 3 ? 'animate-waveform bg-primary' : 'h-1'"
+                                     :style="`height: ${activeTrack === 3 ? Math.random() * 100 + 20 : 10}%; animation-delay: ${i * 0.05}s`">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @click="activeTrack = activeTrack === 4 ? null : 4" 
+                 class="group relative bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[2.5rem] border-2 border-transparent transition-all duration-500 cursor-pointer overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/5"
+                 :class="activeTrack === 4 ? 'border-primary shadow-primary/10' : 'hover:border-purple-100 dark:hover:border-purple-900/40'">
+                
+                <div class="flex items-center gap-6 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-105">
+                        <i x-show="activeTrack !== 4" data-lucide="play" class="w-6 h-6 fill-current"></i>
+                        <i x-show="activeTrack === 4" data-lucide="pause" class="w-6 h-6 fill-current" x-cloak></i>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-primary">00:30</span>
+                            <span class="px-3 py-1 bg-surface dark:bg-purple-900/30 rounded-full text-[10px] font-bold text-slate-500 dark:text-purple-200 uppercase tracking-tighter">Engaging / Smooth</span>
+                        </div>
+                        <h3 class="text-xl font-black text-secondary dark:text-white">Podcast Intro</h3>
+                        <div class="flex items-end gap-[3px] h-8 pt-2">
+                            <template x-for="i in 30">
+                                <div class="bg-primary/20 w-1 rounded-full transition-all duration-500"
+                                     :class="activeTrack === 4 ? 'animate-waveform bg-primary' : 'h-1'"
+                                     :style="`height: ${activeTrack === 4 ? Math.random() * 100 + 20 : 10}%; animation-delay: ${i * 0.05}s`">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes waveform {
+        0%, 100% { transform: scaleY(0.5); }
+        50% { transform: scaleY(1.2); }
+    }
+    .animate-waveform {
+        animation: waveform 0.8s ease-in-out infinite;
+        transform-origin: bottom;
+    }
+</style>
+<section class="py-24 bg-surface dark:bg-slate-950" x-data="{ hoveredActor: null }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-20 space-y-4">
+            <span class="inline-flex items-center gap-2 px-4 py-1 bg-primary/10 rounded-full text-xs font-black uppercase tracking-[0.2em] text-primary">
+                <i data-lucide="mic-2" class="w-4 h-4"></i> Professional Roster
+            </span>
+            <h2 class="text-4xl md:text-6xl font-black text-secondary dark:text-white leading-tight">
+                Voices with <span class="text-primary">Soul</span>
+            </h2>
+            <p class="text-slate-500 dark:text-purple-200/50 max-w-xl mx-auto font-medium">
+                Our talent doesn't just read scripts—they tell stories. Meet the artists bringing emotional depth to every syllable.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 lg:gap-y-24">
+            
+            <div @mouseenter="hoveredActor = 1" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors2" alt="John Doe" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Available for Remote Sessions</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">John Doe</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "A classically trained theater actor with 15+ years on stage, John specializes in deep, evocative audiobook narration that breathes a cinematic soul into every character he touches."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: The Witcher Series, Netflix Originals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @mouseenter="hoveredActor = 2" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors3" alt="Jane Smith" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Commercial Specialist</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">Jane Smith</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "Blending her history as a creative copywriter with a warm vocal tone, Jane delivers conversational commercial reads that feel less like an advertisement and more like a trusted friend."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: Spotify Ads, Calm App Meditations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @mouseenter="hoveredActor = 3" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors4" alt="Michael Brown" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Gaming & Animation</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">Michael Brown</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "A professional improvisor with a mastery of vocal play, Michael provides a highly versatile range of character voices that have defined triple-A gaming titles and indie animations."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: Cyberpunk 2077, Ubisoft Titles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @mouseenter="hoveredActor = 4" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors5" alt="David Chen" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Documentary & Narration</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">David Chen</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "With a 20-year career in broadcast journalism, David brings absolute precision and authority to complex non-fiction scripts, making him the primer choice for corporate storytelling."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: Apple Demos, BBC Science</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @mouseenter="hoveredActor = 5" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors6" alt="Sarah Williams" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Trailer & Film Specialist</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">Sarah Williams</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "Rooted in independent filmmaking, Sarah’s specialty lies in moody, emotionally complex cinematic work that captures the mystery of a trailer or the intensity of a drama."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: Dune Trailer (Intl), Audible Dramas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div @mouseenter="hoveredActor = 6" @mouseleave="hoveredActor = null" class="group flex flex-col h-full">
+                <div class="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 transition-all duration-500 group-hover:-translate-y-2">
+                    <img src="assets/voiceactors7" alt="Sam Jones" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white text-xs font-bold uppercase tracking-widest">Character Voice Talent</p>
+                    </div>
+                </div>
+                <div class="mt-8 px-2 flex flex-col flex-grow">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-3xl font-black text-secondary dark:text-white group-hover:text-primary transition-colors whitespace-nowrap">Sam Jones</h3>
+                        <div class="h-px bg-purple-100 dark:bg-purple-900/30 w-full"></div>
+                    </div>
+                    <div class="flex flex-col h-full bg-white dark:bg-slate-900 rounded-[2rem] border border-purple-100 dark:border-purple-900/40 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 dark:text-purple-100/80 leading-relaxed italic mb-6 flex-grow">
+                            "A master of accents and comedic timing, Sam brings energy and undeniable texture to animations and children's media, making every role distinctly memorable."
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mt-auto border-t border-purple-50 dark:border-purple-900/20 pt-4">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            <span>Notable: Disney Animations, Various Cartoons</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-20 lg:py-32 bg-white dark:bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div class="space-y-4">
+                <h2 class="text-3xl md:text-5xl font-black text-secondary dark:text-white tracking-tight">
+                    Vocal <span class="text-primary">Styles</span> & Expertise
+                </h2>
+                <p class="text-slate-500 dark:text-purple-200/50 max-w-md font-medium">
+                    From intimate narration to high-energy commercials, find the perfect texture for your script.
+                </p>
+            </div>
+            <div class="hidden md:flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-surface dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800">
+                <span class="flex h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-secondary dark:text-purple-100">Broadcast Ready Range</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="group p-8 bg-surface dark:bg-slate-900 rounded-[2.5rem] border-2 border-transparent hover:border-primary hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-primary/10">
+                <div class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i data-lucide="heart" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-secondary dark:text-white mb-3">Warm and Close Friendly</h3>
+                <p class="text-sm text-slate-500 dark:text-purple-200/60 leading-relaxed mb-6">
+                    Perfect for e-learning, explainer videos, Anlayze Voice and inviting brand stories.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Relatable</span>
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Sincere</span>
+                </div>
+            </div>
+
+            <div class="group p-8 bg-surface dark:bg-slate-900 rounded-[2.5rem] border-2 border-transparent hover:border-primary hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-primary/10">
+                <div class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i data-lucide="shield-check" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-secondary dark:text-white mb-3">Deep & Authoritative</h3>
+                <p class="text-sm text-slate-500 dark:text-purple-200/60 leading-relaxed mb-6">
+                    Commanding presence for movie trailers, documentaries, and high-end brands.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Commanding</span>
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Trustworthy</span>
+                </div>
+            </div>
+
+            <div class="group p-8 bg-surface dark:bg-slate-900 rounded-[2.5rem] border-2 border-transparent hover:border-primary hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-primary/10">
+                <div class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    <i data-lucide="zap" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-secondary dark:text-white mb-3">Energetic & Youthful</h3>
+                <p class="text-sm text-slate-500 dark:text-purple-200/60 leading-relaxed mb-6">
+                    High-energy delivery for Gen-Z marketing, sports, and fast-paced commercials.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Vibrant</span>
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-primary transition-colors">Trendy</span>
+                </div>
+            </div>
+
+            <div class="group p-8 bg-surface dark:bg-slate-950 rounded-[2.5rem] border-2 border-transparent hover:border-accent hover:bg-white dark:hover:bg-slate-900 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-accent/10">
+                <div class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-accent mb-6 shadow-sm group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                    <i data-lucide="theater" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-secondary dark:text-white mb-3">Character and  Acting</h3>
+                <p class="text-sm text-slate-500 dark:text-purple-200/60 leading-relaxed mb-6">
+                    Versatile range for gaming, animation, and unique artistic narratives.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-accent transition-colors">Versatile</span>
+                    <span class="px-3 py-1 bg-white/50 dark:bg-slate-950/50 rounded-lg text-[10px] font-black uppercase tracking-tighter text-slate-400 group-hover:text-accent transition-colors">Unique</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-20 lg:py-32 bg-surface dark:bg-slate-950 flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl" x-data="bookingForm()">
+        
+        <div class="bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-primary/10 border border-purple-100 dark:border-purple-900/30 relative overflow-hidden group">
+            
+            <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-accent opacity-[0.03] blur-3xl rounded-full group-hover:opacity-10 transition-opacity duration-700"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
+                        <i data-lucide="calendar-check" class="w-4 h-4"></i> Secure Booking
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-black text-secondary dark:text-white tracking-tight mb-4">
+                        Book This <span class="text-primary">Voice</span>
+                    </h2>
+                    <p class="text-sm md:text-base text-slate-500 dark:text-purple-200/50 font-medium">
+                        Fill in your project details below to secure your session.
+                    </p>
+                </div>
+
+                <form class="space-y-6" @submit.prevent="submitBooking()">
+                    
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Project Type</label>
+                        <div class="relative">
+                            <select required class="w-full px-6 py-4 rounded-2xl bg-surface dark:bg-slate-800 border-2 border-transparent focus:border-accent focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm font-bold appearance-none cursor-pointer text-secondary dark:text-purple-100">
+                                <option value="" disabled selected>Select category</option>
+                                <option>Audiobook Narration</option>
+                                <option>Commercial / Ad Spot</option>
+                                <option>Corporate / Explainer</option>
+                                <option>Gaming / Character</option>
+                                <option>Podcast Intro/Outro</option>
+                            </select>
+                            <div class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-primary">
+                                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Upload Script (Optional)</label>
+                        <label class="flex flex-col items-center justify-center w-full h-32 rounded-2xl border-2 border-dashed border-purple-100 dark:border-purple-800 bg-surface dark:bg-slate-800 hover:border-accent hover:bg-white dark:hover:bg-purple-900/10 transition-all cursor-pointer group/upload">
+                            <div class="flex flex-col items-center justify-center py-4">
+                                <i data-lucide="file-up" class="w-8 h-8 text-slate-300 group-hover/upload:text-accent group-hover/upload:scale-110 transition-all mb-2"></i>
+                                <p class="text-[11px] text-slate-400 font-bold uppercase tracking-tight">
+                                    <span class="text-primary">Click to attach</span> or drag & drop
+                                </p>
+                            </div>
+                            <input type="file" class="hidden" />
+                        </label>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Additional Directions</label>
+                        <textarea rows="4" placeholder="Mention specific tone, pacing, or pronunciation requirements..." 
+                                  class="w-full px-6 py-4 rounded-2xl bg-surface dark:bg-slate-800 border-2 border-transparent focus:border-accent focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm font-medium text-secondary dark:text-purple-100"></textarea>
+                    </div>
+
+                    <button class="group w-full py-5 bg-primary text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-xl shadow-primary/30 hover:bg-secondary hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-4">
+                        Book This Voice
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+
+                <div class="mt-8 flex items-center justify-center gap-6 border-t border-purple-50 dark:border-purple-900/20 pt-8">
+                    <div class="flex items-center gap-2 opacity-40">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Secure Payments</span>
+                    </div>
+                    <div class="flex items-center gap-2 opacity-40">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Fast Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function bookingForm() {
+        return {
+            submitBooking() {
+                // Handle the booking logic here
+                alert('Request received! Our studio manager will confirm your slot via email shortly.');
+            },
+            init() {
+                lucide.createIcons();
+            }
+        }
+    }
+</script>
+<section class="py-24 bg-white dark:bg-slate-950" x-data="{ annual: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-3xl md:text-5xl font-black">Transparent <span class="text-primary">Studio Rates</span></h2>
+            <p class="text-slate-500 dark:text-purple-200/50">Choose a plan that fits your project scale, or request a tailored production.</p>
+            
+            <div class="flex items-center justify-center gap-4 pt-6">
+                <span :class="!annual ? 'text-primary font-bold' : 'text-slate-400'" class="text-sm transition-colors">Monthly</span>
+                <button @click="annual = !annual" 
+                        class="w-14 h-7 bg-purple-100 dark:bg-slate-800 rounded-full relative p-1 transition-colors">
+                    <div :class="annual ? 'translate-x-7' : 'translate-x-0'" 
+                         class="w-5 h-5 bg-primary rounded-full transition-transform duration-300 shadow-md"></div>
+                </button>
+                <span :class="annual ? 'text-primary font-bold' : 'text-slate-400'" class="text-sm transition-colors">Yearly <span class="text-[10px] bg-accent text-white px-2 py-0.5 rounded-full ml-1">-20%</span></span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-end">
+            
+            <div class="group p-6 lg:p-8 rounded-[2rem] lg:rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-purple-100 dark:border-purple-900/20 hover:border-primary transition-all duration-500">
+                <div class="mb-8">
+                    <h3 class="text-lg lg:text-xl font-bold mb-2">Starter</h3>
+                    <p class="text-xs lg:text-sm text-slate-500 dark:text-purple-200/50">Short-form voiceovers</p>
+                    <div class="mt-6 flex items-baseline gap-1">
+                        <span class="text-2xl lg:text-4xl font-black text-secondary dark:text-white">$</span>
+                        <span class="text-4xl lg:text-5xl font-black text-secondary dark:text-white" x-text="annual ? '39' : '49'">49</span>
+                        <span class="text-xs text-slate-400">/project</span>
+                    </div>
+                </div>
+                <ul class="space-y-3 lg:space-y-4 mb-10">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Up to 2 mins</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> 1 Voice talent</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> 48h Delivery</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm opacity-40"><i data-lucide="x" class="w-4 h-4"></i> Music</li>
+                </ul>
+                <button class="w-full py-3 lg:py-4 rounded-2xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all text-sm lg:text-base">Get Started</button>
+            </div>
+
+            <div class="relative group p-6 lg:p-8 rounded-[2rem] lg:rounded-[2.5rem] bg-white dark:bg-slate-800 border-2 border-primary shadow-2xl shadow-primary/20 md:scale-105 lg:scale-110 z-10">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-[10px] lg:text-xs text-white px-4 lg:px-6 py-1 rounded-full font-black uppercase tracking-widest whitespace-nowrap">Most Popular</div>
+                <div class="mb-8 text-center">
+                    <h3 class="text-xl lg:text-2xl font-bold mb-2">Standard</h3>
+                    <p class="text-xs lg:text-sm text-slate-500 dark:text-purple-200/50">Audiobooks</p>
+                    <div class="mt-6 flex items-baseline justify-center gap-1">
+                        <span class="text-2xl lg:text-4xl font-black text-primary">$</span>
+                        <span class="text-4xl lg:text-6xl font-black text-primary" x-text="annual ? '159' : '199'">199</span>
+                        <span class="text-xs text-slate-400">/PFH</span>
+                    </div>
+                </div>
+                <ul class="space-y-3 lg:space-y-4 mb-10">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check-circle" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i> Finished Hour</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check-circle" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i> ACX Mastering</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check-circle" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i> 2 Revisions</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check-circle" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i> Comm. Rights</li>
+                </ul>
+                <button class="w-full py-3 lg:py-4 rounded-2xl bg-primary text-white font-bold hover:bg-secondary hover:shadow-xl transition-all text-sm lg:text-base">Select Plan</button>
+            </div>
+
+            <div class="group p-6 lg:p-8 rounded-[2rem] lg:rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-purple-100 dark:border-purple-900/20 hover:border-primary transition-all duration-500">
+                <div class="mb-8">
+                    <h3 class="text-lg lg:text-xl font-bold mb-2">Premium</h3>
+                    <p class="text-xs lg:text-sm text-slate-500 dark:text-purple-200/50">Full Production</p>
+                    <div class="mt-6 flex items-baseline gap-1">
+                        <span class="text-2xl lg:text-3xl font-black text-secondary dark:text-white">Custom</span>
+                    </div>
+                </div>
+                <ul class="space-y-3 lg:space-y-4 mb-10">
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Multi-cast</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Sound Design</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Marketing</li>
+                    <li class="flex items-center gap-2 lg:gap-3 text-xs lg:text-sm"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Priority</li>
+                </ul>
+                <button class="w-full py-3 lg:py-4 rounded-2xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all text-xs lg:text-base whitespace-nowrap">Custom Quote</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-12 bg-white dark:bg-slate-950" x-data="{ status: 'available' }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="relative overflow-hidden bg-surface dark:bg-slate-900 rounded-[2.5rem] p-6 md:p-8 border border-purple-100 dark:border-purple-900/30 shadow-xl shadow-primary/5">
+            
+            <div class="absolute top-1/2 left-0 -translate-y-1/2 w-32 h-32 bg-primary/10 blur-[60px] rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                
+                <div class="flex items-center gap-6">
+                    <div class="relative flex-shrink-0">
+                        <span class="absolute inset-0 rounded-full animate-ping opacity-25" 
+                              :class="status === 'available' ? 'bg-green-500' : 'bg-amber-500'"></span>
+                        <div class="relative w-16 h-16 rounded-2xl flex items-center justify-center bg-white dark:bg-slate-800 shadow-inner border border-purple-50 dark:border-slate-700">
+                            <div class="w-4 h-4 rounded-full shadow-lg" 
+                                 :class="status === 'available' ? 'bg-green-500' : 'bg-amber-500'"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Current Studio Status</h4>
+                        <div class="flex flex-col">
+                            <span x-show="status === 'available'" x-cloak
+                                  class="text-2xl font-black text-secondary dark:text-white leading-tight">
+                                Available Now
+                            </span>
+                            <span x-show="status === 'busy'" x-cloak
+                                  class="text-2xl font-black text-secondary dark:text-white leading-tight">
+                                Currently Busy
+                            </span>
+                            <p class="text-sm font-medium text-slate-500 dark:text-purple-200/50">
+                                <span x-show="status === 'available'">Ready for same-day delivery.</span>
+                                <span x-show="status === 'busy'">Next slot: <span class="text-primary font-bold">April 20, 2026</span></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+                    <button @click="status = status === 'available' ? 'busy' : 'available'" 
+                            class="px-5 py-3 rounded-xl border-2 border-purple-100 dark:border-purple-800 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:border-primary hover:text-primary transition-all active:scale-95">
+                        Test Status Toggle
+                    </button>
+
+                    <a href="contact.html" 
+                       class="w-full sm:w-auto px-10 py-5 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/30 hover:bg-secondary hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-3 group">
+                        Book This Slot
+                        <i data-lucide="zap" class="w-5 h-5 fill-current group-hover:animate-bounce"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        
+        <p class="mt-4 text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center justify-center gap-2">
+            <i data-lucide="clock" class="w-3 h-3"></i> 
+            Average turnaround: Under 24 Hours
+        </p>
+    </div>
+</section>
+ <footer class="bg-white dark:bg-slate-950 pt-20 pb-10 border-t border-purple-100 dark:border-purple-900/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div class="space-y-6">
+                <a href="index.html" class="no-underline">
+                    <div class="flex items-center gap-3 group transition-transform hover:scale-[1.02]">
+                        <div class="flex-shrink-0 w-9 h-9 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/25">
+                            <i data-lucide="mic-2" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white whitespace-nowrap opacity-100">
+                            SonicNarrate
+                        </span>
+                    </div>
+                </a>
+                <p class="text-slate-500 dark:text-purple-200/50 leading-relaxed text-sm">
+                    Setting the standard in high-fidelity vocal production and storytelling excellence.
+                </p>
+                                <div class="flex space-x-3">
+    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/20 text-primary hover:bg-primary hover:text-white transition-all duration-300">
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg>
+    </a>
+    
+    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/20 text-primary hover:bg-primary hover:text-white transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+</svg>
+    </a>
+    
+    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/20 text-primary hover:bg-primary hover:text-white transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
+    </a>
+    
+    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/20 text-primary hover:bg-primary hover:text-white transition-all duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+</svg>
+    </a>
+</div>
+
+<script>
+    // This function must be called to render the icons
+    lucide.createIcons();
+</script>
+            </div>
+
+            <div class="md:col-span-1 lg:col-span-1 grid grid-cols-2 gap-8 md:col-span-2 lg:col-span-1">
+                <div>
+                    <h4 class="text-sm font-black uppercase tracking-widest mb-8 text-secondary dark:text-purple-300">Company</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="index.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="home2.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Home2</a></li>
+                        <li><a href="about.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">About</a></li>
+                        <li><a href="service.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Service</a></li>
+                        <li><a href="contact.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-black uppercase tracking-widest mb-8 text-secondary dark:text-purple-300">Resources</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="actorsprofile.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Actors Profile</a></li>
+                        <li><a href="blog.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="gallery.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Gallery</a></li>
+                        <li><a href="comingsoon.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">Coming Soon</a></li>
+                        <li><a href="404.html" class="text-slate-500 dark:text-purple-200/50 hover:text-primary transition-colors">404</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 lg:col-span-2">
+                <div class="p-6 md:p-8 bg-surface dark:bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative overflow-hidden group">
+                    
+                    <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
+                        <i data-lucide="mail" class="w-16 h-16 md:w-20 md:h-20 text-primary"></i>
+                    </div>
+
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
+                        
+                        <div class="md:max-w-[220px] lg:max-w-xs">
+                            <h4 class="text-lg font-black text-secondary dark:text-purple-300 mb-1 tracking-tight">Newsletter</h4>
+                            <p class="text-xs text-slate-600 dark:text-purple-100/70 font-medium leading-relaxed">Industry news and talent alerts.</p>
+                        </div>
+
+                        <form class="flex-1 flex flex-col sm:flex-row gap-3">
+                            <input type="email" placeholder="Email address" 
+                                   class="flex-1 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-100 dark:border-purple-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all text-sm font-medium">
+                            <button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-secondary transition-all shadow-lg shadow-primary/25 active:scale-95 whitespace-nowrap">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="text-center pt-10 border-t border-purple-100 dark:border-purple-900/30 text-slate-400 text-[10px] font-bold tracking-[0.3em] uppercase">
+            &copy; 2026 SONICNARRATE STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+
+    <script>
+        function studioApp() {
+            return {
+                darkMode: localStorage.getItem('dark-mode') === 'true',
+                isRtl: localStorage.getItem('rtl-mode') === 'true',
+                mobileMenu: false,
+                
+                toggleDark() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('dark-mode', this.darkMode);
+                    document.documentElement.classList.toggle('dark', this.darkMode);
+                },
+                
+                toggleRtl() {
+                    this.isRtl = !this.isRtl;
+                    localStorage.setItem('rtl-mode', this.isRtl);
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                },
+
+                init() {
+                    // Initialize Lucide Icons
+                    lucide.createIcons();
+                    
+                    // Sync initial state
+                    if (this.darkMode) document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

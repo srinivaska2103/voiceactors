@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" x-data="authApp()" :class="{ 'dark': darkMode }" :dir="isRtl ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" 
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c3aed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'></path><path d='M19 10v2a7 7 0 0 1-14 0v-2'></path><line x1='12' x2='12' y1='19' y2='22'></line></svg>">
+    <title>Sign Up | SonicNarrate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7c3aed',
+                        secondary: '#4c1d95',
+                         accent: '#c026d3',     /* Fuchsia 600 */
+                        surface: '#faf5ff'     /* Purple 50 */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased">
+
+    <header class="fixed top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 h-16 md:h-20">
+        <a href="index.html" class="flex items-center gap-2 group no-underline">
+            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/25 transition-all group-hover:bg-secondary">
+                <i data-lucide="mic-2" class="w-4 h-4"></i>
+            </div>
+           <span class="text-xl lg:text-2xl font-bold tracking-tight text-primary dark:text-white whitespace-nowrap opacity-100">
+                SonicNarrate
+            </span>
+        </a>
+
+        <div class="flex items-center gap-2">
+            <button @click="toggleRtl()" class="px-2 py-1 border border-slate-200 dark:border-slate-800 rounded-lg text-[9px] font-black uppercase hover:bg-white dark:hover:bg-slate-900 transition-all">
+                <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
+            </button>
+            <button @click="toggleDark()" class="p-1.5 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-white dark:hover:bg-slate-900 transition-all">
+                <i x-show="!darkMode" data-lucide="moon" class="w-4 h-4"></i>
+                <i x-show="darkMode" data-lucide="sun" class="w-4 h-4 text-orange-400"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex items-center justify-center p-4 pt-24 pb-12 sm:pt-28">
+        <div class="w-full max-w-[480px]">
+            
+            <div class="bg-white dark:bg-slate-900 p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-800">
+                <div class="text-center mb-6 md:mb-8">
+                    <h1 class="text-xl md:text-2xl font-black mb-2 tracking-tight">Create Account</h1>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-purple-200/50 font-medium">Join the world's elite voice acting community</p>
+                </div>
+
+                <form class="space-y-4" @submit.prevent>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">First Name</label>
+                            <input type="text" placeholder="John" 
+                                   class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-primary focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Last Name</label>
+                            <input type="text" placeholder="Doe" 
+                                   class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-primary focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Email Address</label>
+                        <input type="email" placeholder="john@example.com" 
+                               class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-primary focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Account Type</label>
+                        <div class="grid grid-cols-2 gap-3" x-data="{ selected: 'client' }">
+                            <button type="button" @click="selected = 'client'" 
+                                    :class="selected === 'client' ? 'border-primary bg-purple-50 dark:bg-purple-900/20 text-primary shadow-sm' : 'border-transparent bg-slate-50 dark:bg-slate-800 text-slate-500'"
+                                    class="py-3 px-2 rounded-xl border-2 text-[11px] font-black uppercase transition-all">
+                                Client / Author
+                            </button>
+                            <button type="button" @click="selected = 'talent'" 
+                                    :class="selected === 'talent' ? 'border-primary bg-purple-50 dark:bg-purple-900/20 text-primary shadow-sm' : 'border-transparent bg-slate-50 dark:bg-slate-800 text-slate-500'"
+                                    class="py-3 px-2 rounded-xl border-2 text-[11px] font-black uppercase transition-all">
+                                Voice Talent
+                            </button>
+                        </div>
+                    </div>
+
+                    <div x-data="{ show: false }" class="space-y-1.5">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Password</label>
+                        <div class="relative">
+                            <input :type="show ? 'text' : 'password'" placeholder="Min. 8 characters" 
+                                   class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-primary focus:bg-white dark:focus:bg-slate-900 outline-none transition-all text-sm">
+                            <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors">
+                                <i :data-lucide="show ? 'eye-off' : 'eye'" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <div class="flex gap-1 mt-2 px-1">
+                            <div class="h-1 flex-1 bg-primary rounded-full"></div>
+                            <div class="h-1 flex-1 bg-primary rounded-full"></div>
+                            <div class="h-1 flex-1 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+                            <div class="h-1 flex-1 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <button class="w-full py-4 bg-primary text-white text-sm font-black uppercase tracking-widest rounded-xl shadow-lg shadow-primary/30 hover:bg-secondary transition-all active:scale-95 mt-2">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="relative flex items-center justify-center my-6 md:my-8">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-100 dark:border-slate-800"></div></div>
+                    <span class="relative px-3 bg-white dark:bg-slate-900 text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">OR REGISTER WITH</span>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <button class="flex-1 flex justify-center py-3 border border-slate-100 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        <i data-lucide="chrome" class="w-5 h-5"></i>
+                    </button>
+                    <button class="flex-1 flex justify-center py-3 border border-slate-100 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <p class="mt-8 text-center text-xs text-slate-500 dark:text-purple-200/50 font-medium">
+                    Already have an account? 
+                    <a href="login.html" class="font-black text-primary hover:text-secondary underline decoration-2 underline-offset-4">Log In</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function authApp() {
+            return {
+                darkMode: localStorage.getItem('dark-mode') === 'true',
+                isRtl: localStorage.getItem('rtl-mode') === 'true',
+                toggleDark() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('dark-mode', this.darkMode);
+                    document.documentElement.classList.toggle('dark', this.darkMode);
+                },
+                toggleRtl() {
+                    this.isRtl = !this.isRtl;
+                    localStorage.setItem('rtl-mode', this.isRtl);
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                },
+                init() {
+                    lucide.createIcons();
+                    if (this.darkMode) document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

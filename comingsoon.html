@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" x-data="comingSoonApp()" :class="{ 'dark': darkMode }" :dir="isRtl ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" 
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c3aed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z'></path><path d='M19 10v2a7 7 0 0 1-14 0v-2'></path><line x1='12' x2='12' y1='19' y2='22'></line></svg>">
+    <title>Coming Soon | SonicNarrate Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7c3aed',
+                        secondary: '#4c1d95',
+                        accent: '#c026d3',
+                        surface: '#faf5ff'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased overflow-x-hidden">
+
+    <header class="fixed top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md">
+        <a href="index.html" class="flex items-center gap-3 group no-underline">
+            <div class="flex-shrink-0 w-9 h-9 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/25 transition-all group-hover:bg-secondary">
+                <i data-lucide="mic-2" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-primary dark:text-white whitespace-nowrap opacity-100">
+                SonicNarrate
+            </span>
+        </a>
+
+        <div class="flex items-center gap-2">
+            <button @click="toggleRtl()" class="px-3 py-1.5 border border-slate-200 dark:border-slate-800 rounded-lg text-[10px] font-black uppercase hover:bg-white dark:hover:bg-slate-900 transition-all">
+                <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
+            </button>
+            <button @click="toggleDark()" class="p-2 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-white dark:hover:bg-slate-900 transition-all">
+                <i x-show="!darkMode" data-lucide="moon" class="w-4 h-4 text-secondary"></i>
+                <i x-show="darkMode" data-lucide="sun" class="w-4 h-4 text-orange-400"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-4 pt-20">
+        <div class="max-w-3xl w-full text-center space-y-12">
+            
+            <div class="space-y-4">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">
+                    <i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Preparing the Booth
+                </span>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-secondary dark:text-white leading-tight">
+                    Something <span class="text-accent">Legendary</span> <br> is Recording.
+                </h1>
+                <p class="text-slate-500 dark:text-purple-200/50 text-sm md:text-base max-w-lg mx-auto font-medium">
+                    Our new talent directory and automated booking system is almost ready. Get your scripts ready for the next level.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-[2rem] border border-purple-100 dark:border-purple-900/30 shadow-sm">
+                    <div class="text-3xl md:text-4xl font-black text-primary" x-text="days">00</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Days</div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-[2rem] border border-purple-100 dark:border-purple-900/30 shadow-sm">
+                    <div class="text-3xl md:text-4xl font-black text-primary" x-text="hours">00</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Hours</div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-[2rem] border border-purple-100 dark:border-purple-900/30 shadow-sm">
+                    <div class="text-3xl md:text-4xl font-black text-primary" x-text="minutes">00</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Mins</div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-[2rem] border border-purple-100 dark:border-purple-900/30 shadow-sm">
+                    <div class="text-3xl md:text-4xl font-black text-primary" x-text="seconds">00</div>
+                    <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Secs</div>
+                </div>
+            </div>
+
+            <div class="max-w-lg mx-auto p-6 md:p-8 bg-surface dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative group">
+                <p class="mb-6 text-sm font-bold text-secondary dark:text-purple-200">Notify me when the booth opens:</p>
+                <form class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" placeholder="Email address" 
+                           class="flex-1 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-transparent focus:border-accent outline-none transition-all text-sm">
+                    <button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-secondary transition-all shadow-lg shadow-primary/25 active:scale-95 whitespace-nowrap">
+                        Join Waitlist
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function comingSoonApp() {
+            return {
+                darkMode: localStorage.getItem('dark-mode') === 'true',
+                isRtl: localStorage.getItem('rtl-mode') === 'true',
+                days: '00', hours: '00', minutes: '00', seconds: '00',
+                
+                // Set the launch date here
+                expiryDate: new Date('2026-06-01T00:00:00').getTime(),
+
+                updateCountdown() {
+                    const now = new Date().getTime();
+                    const distance = this.expiryDate - now;
+
+                    this.days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    this.seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                },
+
+                toggleDark() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('dark-mode', this.darkMode);
+                    document.documentElement.classList.toggle('dark', this.darkMode);
+                },
+
+                toggleRtl() {
+                    this.isRtl = !this.isRtl;
+                    localStorage.setItem('rtl-mode', this.isRtl);
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                },
+
+                init() {
+                    lucide.createIcons();
+                    if (this.darkMode) document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+                    
+                    this.updateCountdown();
+                    setInterval(() => this.updateCountdown(), 1000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
