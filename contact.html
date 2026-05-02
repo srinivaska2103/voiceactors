@@ -45,7 +45,7 @@
 </head>
 <body class="bg-surface dark:bg-slate-950 text-slate-900 dark:text-purple-50 transition-colors duration-300">
 
-      <nav class="fixed w-full z-50 bg-white/95 dark:bg-slate-950/95 border-b border-purple-100 dark:border-purple-900/30">
+     <nav class="fixed w-full z-50 bg-white/95 dark:bg-slate-950/95 border-b border-purple-100 dark:border-purple-900/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
    <div class="flex justify-between h-20 items-center max-w-7xl mx-auto px-4">
     <a href="index.html">
@@ -71,7 +71,7 @@
         </a>
 
         <a href="home2.html" 
-           :class="activePath.includes('home2.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('home2.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Home2
             <span :class="activePath.includes('home2.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -79,7 +79,7 @@
         </a>
 
         <a href="about.html" 
-           :class="activePath.includes('about.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('about.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             About
             <span :class="activePath.includes('about.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -87,7 +87,7 @@
         </a>
 
         <a href="service.html" 
-           :class="activePath.includes('service.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('service.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Service
             <span :class="activePath.includes('service.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -95,15 +95,16 @@
         </a>
 
         <a href="actorsprofile.html" 
-           :class="activePath.includes('actorsprofile.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
-           class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base whitespace-nowrap group">
-            Actors Profile
-            <span :class="activePath.includes('actorsprofile.html') ? 'scale-x-100' : 'scale-x-0'" 
-                  class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
-        </a>
+   :class="activePath.includes('actorsprofile.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
+   class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base whitespace-nowrap group">
+    Actors Profile
+    <!-- Bottom Underline -->
+    <span :class="activePath.includes('actorsprofile.html') ? 'scale-x-100' : 'scale-x-0'" 
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+</a>
 
         <a href="contact.html" 
-           :class="activePath.includes('contact.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('contact.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Contact
             <span :class="activePath.includes('contact.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -136,22 +137,44 @@
             </button>
         </div>
 
-        <a href="login.html" 
-           class="inline-flex items-center justify-center px-4 xl:px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm xl:text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 active:scale-95 group">
-            <span class="relative z-10">Login</span>
-            <i data-lucide="log-in" class="hidden xl:block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
-        </a>
+       <!-- Login CTA: Icon visible from 1024px (lg) upwards -->
+<a href="login.html" 
+   class="inline-flex items-center justify-center px-5 lg:px-6 xl:px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm xl:text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 active:scale-95 group whitespace-nowrap">
+    
+    <span class="relative z-10">Login</span>
+    
+    <!-- Icon logic fixed: Visible from 'lg' (1024px) -->
+    <i data-lucide="log-in" 
+       class="hidden lg:block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform">
+    </i>
+</a>
 
-        <a href="uploadvoice.html" class="bg-primary text-white px-3 xl:px-6 py-2.5 xl:py-3 rounded-xl font-semibold hover:bg-secondary shadow-lg shadow-primary/25 transition-all active:scale-95 text-sm xl:text-base whitespace-nowrap">
-            Upload Voice
-        </a>
+        <!-- Optimized Upload Voice CTA -->
+<a href="uploadvoice.html" 
+   class="inline-flex items-center justify-center 
+          px-5 md:px-6 xl:px-8 py-3 
+          rounded-xl bg-gradient-to-r from-primary to-accent 
+          text-white font-semibold text-[13px] sm:text-sm xl:text-base 
+          shadow-lg shadow-primary/25 hover:shadow-primary/40 
+          hover:-translate-y-1 transition-all duration-300 
+          active:scale-95 whitespace-nowrap group">
+    
+    <!-- Added a context icon for better UX -->
+    <i data-lucide="upload-cloud" class="w-4 h-4 mr-2 group-hover:animate-bounce"></i>
+    
+    <span class="relative">Upload Voice</span>
+</a>
+
+<script>
+    // Ensure Lucide icons are rendered
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
     </div>
 
     <div class="lg:hidden flex items-center gap-3">
-        <button @click="toggleDark()" class="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30">
-            <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
-            <i x-show="darkMode" data-lucide="sun" class="w-5 h-5"></i>
-        </button>
+        
         <button @click="mobileMenu = !mobileMenu" class="p-2 text-primary">
             <i data-lucide="menu" x-show="!mobileMenu" class="w-8 h-8"></i>
             <i data-lucide="x" x-show="mobileMenu" x-cloak class="w-8 h-8"></i>
@@ -167,37 +190,37 @@
              class="lg:hidden bg-white dark:bg-slate-950 border-t border-purple-100 dark:border-purple-900 p-6 space-y-4 shadow-2xl">
            <div class="grid grid-cols-2 gap-4" x-data="{ activePath: window.location.pathname }">
     <a href="index.html" 
-       :class="(activePath.includes('index.html') || activePath === '/') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="(activePath.includes('index.html') || activePath === '/') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Home
     </a>
 
     <a href="home2.html" 
-       :class="activePath.includes('home2.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('home2.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Home2
     </a>
 
     <a href="about.html" 
-       :class="activePath.includes('about.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('about.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        About
     </a>
 
     <a href="service.html" 
-       :class="activePath.includes('service.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('service.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Service
     </a>
 
     <a href="actorsprofile.html" 
-       :class="activePath.includes('actorsprofile.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('actorsprofile.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Actors
     </a>
 
     <a href="contact.html" 
-       :class="activePath.includes('contact.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('contact.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Contact
     </a>
@@ -212,15 +235,38 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 pt-2">
-                <button @click="toggleRtl()" class="w-full py-3 border border-purple-200 dark:border-purple-800 rounded-xl font-bold uppercase tracking-widest text-sm">
-                    Switch to <span x-text="isRtl ? 'LTR' : 'RTL'"></span> Layout
-                </button>
-                <div class="flex gap-2">
-                    <a href="login.html" class="flex-1 text-center py-4 font-bold border-2 border-primary rounded-xl text-primary">Login</a>
-                    <a href="uploadvoice.html" class="flex-[2] text-center py-4 font-bold bg-primary text-white rounded-xl shadow-lg shadow-primary/30">Upload Voice</a>
-                </div>
-            </div>
+           <div class="flex flex-col gap-4 pt-4 px-2 lg:hidden">
+    <!-- Theme & RTL Utility Row -->
+    <div class="flex gap-2">
+        <!-- RTL Switcher: Unified height with theme toggle -->
+        <button @click="toggleRtl()" 
+                class="flex-1 py-3.5 border border-purple-200 dark:border-purple-800 rounded-2xl font-semibold uppercase tracking-widest text-[10px] text-secondary dark:text-purple-200 transition-all active:scale-95">
+            <span x-text="isRtl ? 'LTR' : 'RTL'"></span> Layout
+        </button>
+
+        <!-- Theme Toggle: Now height-matched and visually grounded -->
+        <button @click="toggleDark()" 
+                class="px-5 rounded-2xl bg-purple-50 dark:bg-slate-900 border border-purple-200 dark:border-purple-800 flex items-center justify-center transition-all active:scale-95">
+            <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5 text-secondary"></i>
+            <i x-show="darkMode" data-lucide="sun" class="w-5 h-5 text-yellow-400"></i>
+        </button>
+    </div>
+
+    <!-- Main CTA Row -->
+    <div class="flex gap-3">
+        <!-- Login: Outlined style for secondary importance -->
+        <a href="login.html" 
+           class="flex-1 text-center py-4 font-semibold border-2 border-primary/20 text-primary rounded-2xl text-sm transition-all active:scale-95 whitespace-nowrap">
+            Login
+        </a>
+        
+        <!-- Upload: Solid gradient for primary importance -->
+        <a href="uploadvoice.html" 
+           class="flex-[2] text-center py-4 font-semibold bg-gradient-to-r from-primary to-accent text-white rounded-2xl shadow-lg shadow-primary/20 text-sm transition-all active:scale-95 whitespace-nowrap">
+            Upload Voice
+        </a>
+    </div>
+</div>
         </div>
     </nav>
 
@@ -242,7 +288,7 @@
             <i data-lucide="headset" class="w-4 h-4 text-accent"></i> Get in Touch
         </span>
 
-        <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-white leading-[1.1] md:leading-[0.9] tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+        <h1 class="text-4xl sm:text-5xl md:text-xl lg:text-6 font-semibold text-white leading-[1.1] md:leading-[0.9] tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
             Let's Give Your Story <br class="hidden md:block"> 
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent filter brightness-125 font-semibold">
                 A Global
@@ -280,7 +326,7 @@
             
             <div class="lg:col-span-4 space-y-8">
                 <div class="space-y-4">
-                    <h2 class="text-3xl font-black text-secondary dark:text-white">Contact Info</h2>
+                    <h2 class="text-3xl font-semibold font-black text-secondary dark:text-white">Contact Info</h2>
                     <p class="text-slate-500 dark:text-purple-200/50">Visit our studio or reach out via digital channels.</p>
                 </div>
 
@@ -367,8 +413,6 @@
 </script>
 
 
-
-
  <footer class="bg-white dark:bg-slate-950 pt-20 pb-10 border-t border-purple-100 dark:border-purple-900/30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -444,29 +488,45 @@
             </div>
 
             <div class="md:col-span-2 lg:col-span-2">
-                <div class="p-6 md:p-8 bg-surface dark:bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative overflow-hidden group">
-                    
-                    <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
-                        <i data-lucide="mail" class="w-16 h-16 md:w-20 md:h-20 text-primary"></i>
-                    </div>
+    <div class="p-6 md:p-8 lg:p-6 xl:p-8 bg-surface dark:bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative overflow-hidden group transition-all">
+        
+        <!-- Background Icon Decor -->
+        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
+            <i data-lucide="mail" class="w-16 h-16 md:w-20 md:h-20 text-primary"></i>
+        </div>
 
-                    <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
-                        
-                        <div class="md:max-w-[220px] lg:max-w-xs">
-                            <h4 class="text-lg font-black text-secondary dark:text-purple-300 mb-1 tracking-tight">Newsletter</h4>
-                            <p class="text-xs text-slate-600 dark:text-purple-100/70 font-medium leading-relaxed">Industry news and talent alerts.</p>
-                        </div>
-
-                        <form class="flex-1 flex flex-col sm:flex-row gap-3">
-                            <input type="email" placeholder="Email address" 
-                                   class="flex-1 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-100 dark:border-purple-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all text-sm font-medium">
-                            <button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-secondary transition-all shadow-lg shadow-primary/25 active:scale-95 whitespace-nowrap">
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
-                </div>
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <!-- Text Content: Fixed width at 1024px to prevent overlapping -->
+            <div class="lg:max-w-[200px] xl:max-w-xs">
+                <h4 class="text-lg font-semibold text-secondary dark:text-white mb-1 tracking-tight">
+                    Newsletter
+                </h4>
+                <p class="text-xs text-slate-600 dark:text-purple-100/70 font-normal leading-relaxed">
+                    Industry news and talent alerts.
+                </p>
             </div>
+
+            <!-- Form: Optimized for 1024px -->
+            <!-- Optimized Newsletter Form for 1024px -->
+<form class="flex-1 flex flex-col lg:flex-row gap-3 w-full">
+    <!-- Input: Scales font and padding for 1024px -->
+    <input type="email" 
+           placeholder="Email address" 
+           class="flex-1 min-w-0 px-4 xl:px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-100 dark:border-purple-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all text-[13px] xl:text-sm font-normal text-secondary dark:text-white placeholder:text-slate-400">
+    
+    <!-- Button: Compact padding at 1024px (lg) then expands at 1280px (xl) -->
+    <button class="bg-primary text-white 
+                   px-5 lg:px-4 xl:px-8 py-3.5 
+                   rounded-2xl font-semibold uppercase tracking-widest text-[10px] 
+                   hover:bg-secondary transition-all shadow-lg shadow-primary/25 
+                   active:scale-95 whitespace-nowrap">
+        Subscribe
+    </button>
+</form>
+        </div>
+    </div>
+</div>
 
         </div>
         

@@ -44,13 +44,17 @@
         </a>
 
         <div class="flex items-center gap-2">
-            <button @click="toggleRtl()" class="px-2 py-1.5 border border-slate-200 dark:border-slate-800 rounded-lg text-[10px] font-bold uppercase hover:bg-white dark:hover:bg-slate-900 transition-all">
+            <div class="flex items-center bg-purple-50 dark:bg-purple-900/20 rounded-lg p-1">
+            <button @click="toggleRtl()" class="p-1.5 px-2 text-[10px] font-black uppercase hover:text-primary transition-colors">
                 <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
             </button>
-            <button @click="toggleDark()" class="p-2 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-white dark:hover:bg-slate-900 transition-all">
-                <i x-show="!darkMode" data-lucide="moon" class="w-4 h-4"></i>
-                <i x-show="darkMode" data-lucide="sun" class="w-4 h-4 text-orange-400"></i>
+            <div class="w-[1px] h-4 bg-purple-200 dark:bg-purple-800 mx-1"></div>
+            <button @click="toggleDark()" class="p-1.5 transition-all">
+                <i x-show="!darkMode" data-lucide="moon" class="w-4 h-4 text-secondary"></i>
+                <i x-show="darkMode" data-lucide="sun" class="w-4 h-4 text-yellow-400"></i>
             </button>
+        </div>
+
         </div>
     </header>
 

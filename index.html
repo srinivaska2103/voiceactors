@@ -69,7 +69,7 @@
         </a>
 
         <a href="home2.html" 
-           :class="activePath.includes('home2.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('home2.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Home2
             <span :class="activePath.includes('home2.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -77,7 +77,7 @@
         </a>
 
         <a href="about.html" 
-           :class="activePath.includes('about.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('about.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             About
             <span :class="activePath.includes('about.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -85,7 +85,7 @@
         </a>
 
         <a href="service.html" 
-           :class="activePath.includes('service.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('service.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Service
             <span :class="activePath.includes('service.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -93,15 +93,16 @@
         </a>
 
         <a href="actorsprofile.html" 
-           :class="activePath.includes('actorsprofile.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
-           class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base whitespace-nowrap group">
-            Actors Profile
-            <span :class="activePath.includes('actorsprofile.html') ? 'scale-x-100' : 'scale-x-0'" 
-                  class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
-        </a>
+   :class="activePath.includes('actorsprofile.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
+   class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base whitespace-nowrap group">
+    Actors Profile
+    <!-- Bottom Underline -->
+    <span :class="activePath.includes('actorsprofile.html') ? 'scale-x-100' : 'scale-x-0'" 
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300"></span>
+</a>
 
         <a href="contact.html" 
-           :class="activePath.includes('contact.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-purple-200/70'"
+           :class="activePath.includes('contact.html') ? 'text-primary font-bold' : 'text-slate-600 dark:text-white'"
            class="relative py-2 hover:text-primary font-medium transition-colors text-[13px] xl:text-base group">
             Contact
             <span :class="activePath.includes('contact.html') ? 'scale-x-100' : 'scale-x-0'" 
@@ -134,22 +135,44 @@
             </button>
         </div>
 
-        <a href="login.html" 
-           class="inline-flex items-center justify-center px-4 xl:px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm xl:text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 active:scale-95 group">
-            <span class="relative z-10">Login</span>
-            <i data-lucide="log-in" class="hidden xl:block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
-        </a>
+       <!-- Login CTA: Icon visible from 1024px (lg) upwards -->
+<a href="login.html" 
+   class="inline-flex items-center justify-center px-5 lg:px-6 xl:px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold text-sm xl:text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 active:scale-95 group whitespace-nowrap">
+    
+    <span class="relative z-10">Login</span>
+    
+    <!-- Icon logic fixed: Visible from 'lg' (1024px) -->
+    <i data-lucide="log-in" 
+       class="hidden lg:block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform">
+    </i>
+</a>
 
-        <a href="uploadvoice.html" class="bg-primary text-white px-3 xl:px-6 py-2.5 xl:py-3 rounded-xl font-semibold hover:bg-secondary shadow-lg shadow-primary/25 transition-all active:scale-95 text-sm xl:text-base whitespace-nowrap">
-            Upload Voice
-        </a>
+        <!-- Optimized Upload Voice CTA -->
+<a href="uploadvoice.html" 
+   class="inline-flex items-center justify-center 
+          px-5 md:px-6 xl:px-8 py-3 
+          rounded-xl bg-gradient-to-r from-primary to-accent 
+          text-white font-semibold text-[13px] sm:text-sm xl:text-base 
+          shadow-lg shadow-primary/25 hover:shadow-primary/40 
+          hover:-translate-y-1 transition-all duration-300 
+          active:scale-95 whitespace-nowrap group">
+    
+    <!-- Added a context icon for better UX -->
+    <i data-lucide="upload-cloud" class="w-4 h-4 mr-2 group-hover:animate-bounce"></i>
+    
+    <span class="relative">Upload Voice</span>
+</a>
+
+<script>
+    // Ensure Lucide icons are rendered
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
     </div>
 
     <div class="lg:hidden flex items-center gap-3">
-        <button @click="toggleDark()" class="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30">
-            <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
-            <i x-show="darkMode" data-lucide="sun" class="w-5 h-5"></i>
-        </button>
+        
         <button @click="mobileMenu = !mobileMenu" class="p-2 text-primary">
             <i data-lucide="menu" x-show="!mobileMenu" class="w-8 h-8"></i>
             <i data-lucide="x" x-show="mobileMenu" x-cloak class="w-8 h-8"></i>
@@ -165,37 +188,37 @@
              class="lg:hidden bg-white dark:bg-slate-950 border-t border-purple-100 dark:border-purple-900 p-6 space-y-4 shadow-2xl">
            <div class="grid grid-cols-2 gap-4" x-data="{ activePath: window.location.pathname }">
     <a href="index.html" 
-       :class="(activePath.includes('index.html') || activePath === '/') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="(activePath.includes('index.html') || activePath === '/') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Home
     </a>
 
     <a href="home2.html" 
-       :class="activePath.includes('home2.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('home2.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Home2
     </a>
 
     <a href="about.html" 
-       :class="activePath.includes('about.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('about.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        About
     </a>
 
     <a href="service.html" 
-       :class="activePath.includes('service.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('service.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Service
     </a>
 
     <a href="actorsprofile.html" 
-       :class="activePath.includes('actorsprofile.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('actorsprofile.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Actors
     </a>
 
     <a href="contact.html" 
-       :class="activePath.includes('contact.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-purple-200'"
+       :class="activePath.includes('contact.html') ? 'bg-primary text-white font-bold' : 'bg-purple-50 dark:bg-purple-900/20 text-slate-700 dark:text-white'"
        class="p-3 rounded-lg font-medium transition-all duration-300">
        Contact
     </a>
@@ -210,15 +233,38 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 pt-2">
-                <button @click="toggleRtl()" class="w-full py-3 border border-purple-200 dark:border-purple-800 rounded-xl font-bold uppercase tracking-widest text-sm">
-                    Switch to <span x-text="isRtl ? 'LTR' : 'RTL'"></span> Layout
-                </button>
-                <div class="flex gap-2">
-                    <a href="login.html" class="flex-1 text-center py-4 font-bold border-2 border-primary rounded-xl text-primary">Login</a>
-                    <a href="uploadvoice.html" class="flex-[2] text-center py-4 font-bold bg-primary text-white rounded-xl shadow-lg shadow-primary/30">Upload Voice</a>
-                </div>
-            </div>
+           <div class="flex flex-col gap-4 pt-4 px-2 lg:hidden">
+    <!-- Theme & RTL Utility Row -->
+    <div class="flex gap-2">
+        <!-- RTL Switcher: Unified height with theme toggle -->
+        <button @click="toggleRtl()" 
+                class="flex-1 py-3.5 border border-purple-200 dark:border-purple-800 rounded-2xl font-semibold uppercase tracking-widest text-[10px] text-secondary dark:text-purple-200 transition-all active:scale-95">
+            <span x-text="isRtl ? 'LTR' : 'RTL'"></span> Layout
+        </button>
+
+        <!-- Theme Toggle: Now height-matched and visually grounded -->
+        <button @click="toggleDark()" 
+                class="px-5 rounded-2xl bg-purple-50 dark:bg-slate-900 border border-purple-200 dark:border-purple-800 flex items-center justify-center transition-all active:scale-95">
+            <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5 text-secondary"></i>
+            <i x-show="darkMode" data-lucide="sun" class="w-5 h-5 text-yellow-400"></i>
+        </button>
+    </div>
+
+    <!-- Main CTA Row -->
+    <div class="flex gap-3">
+        <!-- Login: Outlined style for secondary importance -->
+        <a href="login.html" 
+           class="flex-1 text-center py-4 font-semibold border-2 border-primary/20 text-primary rounded-2xl text-sm transition-all active:scale-95 whitespace-nowrap">
+            Login
+        </a>
+        
+        <!-- Upload: Solid gradient for primary importance -->
+        <a href="uploadvoice.html" 
+           class="flex-[2] text-center py-4 font-semibold bg-gradient-to-r from-primary to-accent text-white rounded-2xl shadow-lg shadow-primary/20 text-sm transition-all active:scale-95 whitespace-nowrap">
+            Upload Voice
+        </a>
+    </div>
+</div>
         </div>
     </nav>
 
@@ -237,7 +283,7 @@
                 <span class="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-900/50 text-primary rounded-full text-sm font-bold mb-6 tracking-wide uppercase">
                     Premium Voice Solutions
                 </span>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-semibold text-secondary dark:text-white leading-[0.9] tracking-tighter">
+                <h1 class="text-5xl md:text-7xl lg:text-6xl font-semibold text-secondary dark:text-white leading-[0.9] tracking-tighter">
                   Bringing Stories to Life <br> 
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">One Voice at a</span> <br>
                     Time
@@ -264,7 +310,7 @@
             <div class="lg:w-2/5 relative">
                 <div class="absolute -inset-10 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse"></div>
                 <div class="relative rounded-3xl overflow-hidden shadow-2xl border-[12px] border-white dark:border-slate-800 transform lg:rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <img src="assets/indexhero" 
+                    <img src="assets/indexhero1" 
                          alt="Studio Professional" 
                          class="w-full h-auto object-cover grayscale-[20%] hover:grayscale-0 transition-all">
                     <div class="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-slate-900/90 p-4 rounded-xl backdrop-blur-md border border-white/20">
@@ -281,7 +327,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16">
-<h2 class="text-3xl md:text-5xl font-semibold text-secondary dark:text-white mb-4 leading-tight tracking-tight">
+<h2 class="text-3xl md:text-6xl font-semibold text-secondary dark:text-white mb-4 leading-tight tracking-tight">
     Explore Our <span class="text-primary font-semibold">Voice Library</span>
 </h2>            <p class="text-slate-500 dark:text-purple-200/50 max-w-2xl mx-auto">
                 Filter through our premium voice demos. Click play to experience studio-grade narration and character depth.
@@ -410,7 +456,7 @@
                     <span>Your Story, Our Voice</span>
                 </div>
 
-                <h2 class="text-3xl md:text-5xl font-semibold text-secondary dark:text-white mb-4 leading-tight tracking-tight">
+                <h2 class="text-3xl md:text-6xl font-semibold text-secondary dark:text-white mb-4 leading-tight tracking-tight">
    Every Story <span class="text-primary font-semibold">Deserves Truth</span>
 </h2>
 
@@ -453,121 +499,122 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="mb-16">
-            <h2 class="text-3xl md:text-5xl font-black  text-secondary mb-4">Our <span class="text-primary">Voice Services</span></h2>
+            <h2 class="text-3xl md:text-6xl font-black font-semibold  text-secondary mb-4">Our <span class="text-primary">Voice Services</span></h2>
             <!-- <div class="w-20 h-1.5 bg-primary rounded-full"></div> -->
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div @mouseenter="activeCard = 1" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/autobboknarration" 
-                         alt="Audiobook Narration" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">Audiobook Narration</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">Bringing long-form literature to life with immersive character depth and emotional resonance.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div @mouseenter="activeCard = 2" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/Commercial Voiceovers" 
-                         alt="Commercial Voiceovers" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">Commercial Voiceovers</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">High-impact audio branding for TV, radio, and viral social media advertising campaigns.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div @mouseenter="activeCard = 3" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/Character & Animation" 
-                         alt="Character & Animation" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">Character & Animation</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">Versatile vocal range for AAA gaming, cartoons, and interactive digital avatars.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div @mouseenter="activeCard = 4" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/Podcast Voice" 
-                         alt="Podcast Voice" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">Podcast & Intro Voice</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">Professional intros and outros that give your show an immediate signature sound.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div @mouseenter="activeCard = 5" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/E-learning" 
-                         alt="E-learning" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">E-learning & Explainers</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">Clear, instructional audio designed for maximum student retention and engagement.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div @mouseenter="activeCard = 6" @mouseleave="activeCard = null"
-                 class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="assets/dubbing1" 
-                         alt="Dubbing" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent"></div>
-                </div>
-                
-                <div class="p-8 pt-2 relative z-10">
-                    <h3 class="text-2xl font-bold mb-3">Dubbing & Localization</h3>
-                    <p class="text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2">Adapting your video content for global markets with perfect native-sounding dubs.</p>
-                    <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-bold text-primary group-hover:gap-4 transition-all">
-                        Learn More <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
+    
+    <!-- Card 1: Audiobook Narration -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <!-- grayscale and group-hover classes removed for a normal look -->
+            <img src="assets/autobboknarration" 
+                 alt="Audiobook Narration" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
         </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">Audiobook Narration</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">Bringing long-form literature to life with immersive character depth and emotional resonance.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 2: Commercial Voiceovers -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <img src="assets/Commercial Voiceovers" 
+                 alt="Commercial Voiceovers" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">Commercial Voiceovers</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">High-impact audio branding for TV, radio, and viral social media advertising campaigns.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 3: Character & Animation -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <img src="assets/Character & Animation" 
+                 alt="Character & Animation" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">Character & Animation</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">Versatile vocal range for AAA gaming, cartoons, and interactive digital avatars.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 4: Podcast Voice -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <img src="assets/Podcast Voice" 
+                 alt="Podcast Voice" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">Podcast & Intro Voice</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">Professional intros and outros that give your show an immediate signature sound.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 5: E-learning -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <img src="assets/E-learning" 
+                 alt="E-learning" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">E-learning & Explainers</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">Clear, instructional audio designed for maximum student retention and engagement.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 6: Dubbing -->
+    <div class="relative bg-white dark:bg-slate-900 rounded-[2.5rem] border border-purple-100 dark:border-purple-900/40 shadow-sm overflow-hidden transition-all duration-300">
+        <div class="h-48 overflow-hidden relative">
+            <img src="assets/singer" 
+                 alt="Dubbing" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent"></div>
+        </div>
+        
+        <div class="p-8 pt-2 relative z-10">
+            <h3 class="text-2xl font-semibold mb-3 text-secondary dark:text-white">Dubbing & Localization</h3>
+            <p class="text-sm text-slate-500 dark:text-purple-200/50 mb-8 line-clamp-2 font-normal leading-relaxed">Adapting your video content for global markets with perfect native-sounding dubs.</p>
+            <a href="uploadvoice.html" class="inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-secondary">
+                Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
     </div>
 </section>
 <section class="py-24 bg-white dark:bg-slate-950 overflow-hidden" x-data="{ activeEquip: null }">
@@ -587,7 +634,7 @@
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
                         </span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-white">Broadcast Quality</span>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-white">Broadcast Quality</span>
                     </div>
                     
                     <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-950/90 to-transparent backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -606,7 +653,7 @@
                         <i data-lucide="shield-check" class="w-4 h-4"></i>
                     0% Background Noise. 100% Clarity.
                     </span>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-secondary leading-tight">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold  text-secondary leading-tight">
                         Studio Grade <span class="text-primary">Precision</span>
                     </h2>
                     <p class="text-lg text-slate-600 dark:text-purple-200/70 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -677,20 +724,21 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-5xl font-black text-secondary mb-4">Your Path to <span class="text-primary">Perfect Audio</span></h2>
-            <p class="text-slate-500 dark:text-purple-200/50 max-w-xl mx-auto">
+            <!-- Font-black changed to font-semibold (600) -->
+            <h2 class="text-3xl md:text-6xl font-semibold text-secondary dark:text-white mb-4">
+                Your Path to <span class="text-primary">Perfect Audio</span>
+            </h2>
+            <p class="text-slate-500 dark:text-purple-200/50 max-w-xl mx-auto font-normal">
                 A seamless, professional workflow designed to take your script from paper to a polished masterpiece.
             </p>
         </div>
 
         <div class="relative">
-            <div class="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-purple-100 dark:bg-purple-900/30 -translate-y-1/2 z-0">
-                <div class="h-full bg-primary transition-all duration-700 ease-in-out" 
-                     :style="`width: ${(activeStep - 1) * 33.33}%` transition-all"></div>
-            </div>
+            <!-- Progress Line removed from here -->
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
                 
+                <!-- Step 01 -->
                 <div @mouseenter="activeStep = 1" 
                      class="group flex flex-col items-center text-center space-y-6">
                     <div class="relative">
@@ -698,14 +746,16 @@
                              class="w-20 h-20 rounded-3xl flex items-center justify-center transition-all duration-500 border-2 border-purple-100 dark:border-purple-900/40">
                             <i data-lucide="file-text" class="w-8 h-8"></i>
                         </div>
-                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-black rounded-full flex items-center justify-center">01</span>
+                        <!-- Font-black changed to font-semibold -->
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-semibold rounded-full flex items-center justify-center">01</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Submit Script</h3>
-                        <p class="text-sm text-slate-500 dark:text-purple-200/50">Upload your manuscript or commercial copy with tone requirements.</p>
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors text-secondary dark:text-white">Submit Script</h3>
+                        <p class="text-sm text-slate-500 dark:text-purple-200/50 font-normal">Upload your manuscript or commercial copy with tone requirements.</p>
                     </div>
                 </div>
 
+                <!-- Step 02 -->
                 <div @mouseenter="activeStep = 2" 
                      class="group flex flex-col items-center text-center space-y-6">
                     <div class="relative">
@@ -713,14 +763,15 @@
                              class="w-20 h-20 rounded-3xl flex items-center justify-center transition-all duration-500 border-2 border-purple-100 dark:border-purple-900/40">
                             <i data-lucide="user-check" class="w-8 h-8"></i>
                         </div>
-                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-black rounded-full flex items-center justify-center">02</span>
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-semibold rounded-full flex items-center justify-center">02</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Sample Approval</h3>
-                        <p class="text-sm text-slate-500 dark:text-purple-200/50">Listen to a 30-second custom sample to confirm voice and style.</p>
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors text-secondary dark:text-white">Sample Approval</h3>
+                        <p class="text-sm text-slate-500 dark:text-purple-200/50 font-normal">Listen to a 30-second custom sample to confirm voice and style.</p>
                     </div>
                 </div>
 
+                <!-- Step 03 -->
                 <div @mouseenter="activeStep = 3" 
                      class="group flex flex-col items-center text-center space-y-6">
                     <div class="relative">
@@ -728,14 +779,15 @@
                              class="w-20 h-20 rounded-3xl flex items-center justify-center transition-all duration-500 border-2 border-purple-100 dark:border-purple-900/40">
                             <i data-lucide="settings-2" class="w-8 h-8"></i>
                         </div>
-                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-black rounded-full flex items-center justify-center">03</span>
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-semibold rounded-full flex items-center justify-center">03</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Record & Edit</h3>
-                        <p class="text-sm text-slate-500 dark:text-purple-200/50">Full production in our treated booth with professional mastering.</p>
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors text-secondary dark:text-white">Record & Edit</h3>
+                        <p class="text-sm text-slate-500 dark:text-purple-200/50 font-normal">Full production in our treated booth with professional mastering.</p>
                     </div>
                 </div>
 
+                <!-- Step 04 -->
                 <div @mouseenter="activeStep = 4" 
                      class="group flex flex-col items-center text-center space-y-6">
                     <div class="relative">
@@ -743,11 +795,11 @@
                              class="w-20 h-20 rounded-3xl flex items-center justify-center transition-all duration-500 border-2 border-purple-100 dark:border-purple-900/40">
                             <i data-lucide="package-check" class="w-8 h-8"></i>
                         </div>
-                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-black rounded-full flex items-center justify-center">04</span>
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary dark:bg-purple-800 text-white text-xs font-semibold rounded-full flex items-center justify-center">04</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Final Delivery</h3>
-                        <p class="text-sm text-slate-500 dark:text-purple-200/50">Receive your high-quality WAV/MP3 files ready for distribution.</p>
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors text-secondary dark:text-white">Final Delivery</h3>
+                        <p class="text-sm text-slate-500 dark:text-purple-200/50 font-normal">Receive your high-quality WAV/MP3 files ready for distribution.</p>
                     </div>
                 </div>
 
@@ -755,7 +807,7 @@
         </div>
 
         <div class="mt-20 flex justify-center">
-            <a href="#contact" class="flex items-center gap-3 bg-white dark:bg-slate-900 border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold hover:bg-primary hover:text-white transition-all shadow-lg shadow-primary/10">
+            <a href="#contact" class="flex items-center gap-3 bg-white dark:bg-slate-900 border-2 border-primary text-primary px-8 py-4 rounded-2xl font-semibold hover:bg-primary hover:text-white transition-all shadow-lg shadow-primary/10">
                 Let's Get Started <i data-lucide="zap" class="w-5 h-5"></i>
             </a>
         </div>
@@ -765,7 +817,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16 space-y-4">
-            <h2 class="text-3xl md:text-5xl font-black text-secondary">Transparent <span class="text-primary">Studio Rates</span></h2>
+            <h2 class="text-3xl md:text-6xl font-semibold font-black text-secondary">Transparent <span class="text-primary">Studio Rates</span></h2>
             <p class="text-slate-500 dark:text-purple-200/50">Choose a plan that fits your project scale, or request a tailored production.</p>
             
             <div class="flex items-center justify-center gap-4 pt-6">
@@ -845,7 +897,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-5xl font-black  text-secondary mb-4">What Our <span class="text-primary">Clients Say</span></h2>
+            <h2 class="text-3xl md:text-6xl font-semibold font-black  text-secondary mb-4">What Our <span class="text-primary">Clients Say</span></h2>
             <p class="text-slate-500 dark:text-purple-200/50 max-w-xl mx-auto">
                 Discover why authors and global brands trust SonicNarrate for their most important audio projects.
             </p>
@@ -957,41 +1009,52 @@
 </section>
 <section class="py-20 lg:py-32 bg-white dark:bg-slate-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary via-secondary to-slate-950 p-8 md:p-16 lg:p-24 shadow-2xl shadow-primary/30">
+        <!-- Main Card: Uses a refined gradient and rounded corners -->
+        <div class="relative overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-br from-primary via-secondary to-slate-950 p-8 md:p-16 lg:p-24 shadow-2xl shadow-primary/30">
             
+            <!-- Decorative Ambient Glows -->
             <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-accent opacity-20 blur-[100px] rounded-full"></div>
             <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-72 h-72 bg-primary opacity-30 blur-[80px] rounded-full"></div>
             
             <div class="relative z-10 flex flex-col items-center text-center space-y-8">
-                <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/20 animate-bounce">
-                    <i data-lucide="mic-2" class="w-8 h-8"></i>
+                <!-- Icon Badge -->
+                <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/20 animate-bounce">
+                    <i data-lucide="mic-2" class="w-7 h-7"></i>
                 </div>
 
-                <div class="max-w-3xl space-y-4">
-                    <h2 class="text-4xl md:text-5xl lg:text-7xl font-black text-secondary text-white leading-tight">
-                        Ready to Hear Your Story <br class="hidden md:block"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-accent">Come Alive?</span>
+                <div class="max-w-3xl space-y-6">
+                    <!-- Adjusted Heading Size: Slightly smaller, Semibold (600), Pure White -->
+                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.1] tracking-tighter">
+                        Ready to Hear Your Story <br class="hidden md:block"> 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-100 to-accent font-semibold">
+                            Come Alive?
+                        </span>
                     </h2>
-                    <p class="text-lg md:text-xl text-purple-100/80 font-medium">
-                        Join hundreds of authors and brands who have elevated their projects with our studio-grade narration.
+                    
+                    <!-- Subtext: Normal Weight (400) -->
+                    <p class="text-base md:text-lg text-purple-100/80 font-normal leading-relaxed max-w-2xl mx-auto">
+                        Join hundreds of authors and brands who have elevated their projects with our studio-grade narration and sound design.
                     </p>
                 </div>
 
+                <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
                     <a href="uploadvoice.html" 
-                       class="w-full sm:w-auto px-10 py-5 bg-white text-secondary font-black rounded-2xl hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl flex items-center justify-center gap-3 group">
+                       class="w-full sm:w-auto px-10 py-5 bg-white text-secondary font-semibold rounded-2xl hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl flex items-center justify-center gap-3 group">
                         Book a Session
                         <i data-lucide="calendar" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
                     </a>
                     
                     <a href="contact.html" 
-                       class="w-full sm:w-auto px-10 py-5 bg-transparent text-white font-bold rounded-2xl border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all flex items-center justify-center gap-3">
+                       class="w-full sm:w-auto px-10 py-5 bg-transparent text-white font-semibold rounded-2xl border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all flex items-center justify-center gap-3">
                         Request a Quote
                         <i data-lucide="file-text" class="w-5 h-5"></i>
                     </a>
                 </div>
 
-                <div class="pt-4 flex items-center gap-2 text-purple-200/60 text-sm font-bold uppercase tracking-widest">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <!-- Trust Signal -->
+                <div class="pt-4 flex items-center gap-2 text-purple-200/50 text-[10px] font-semibold uppercase tracking-[0.2em]">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-accent"></i>
                     Secure Booking & NDA Protected
                 </div>
             </div>
@@ -1073,29 +1136,45 @@
             </div>
 
             <div class="md:col-span-2 lg:col-span-2">
-                <div class="p-6 md:p-8 bg-surface dark:bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative overflow-hidden group">
-                    
-                    <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
-                        <i data-lucide="mail" class="w-16 h-16 md:w-20 md:h-20 text-primary"></i>
-                    </div>
+    <div class="p-6 md:p-8 lg:p-6 xl:p-8 bg-surface dark:bg-slate-900 rounded-[2rem] md:rounded-[2.5rem] border border-purple-100 dark:border-purple-900/50 relative overflow-hidden group transition-all">
+        
+        <!-- Background Icon Decor -->
+        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
+            <i data-lucide="mail" class="w-16 h-16 md:w-20 md:h-20 text-primary"></i>
+        </div>
 
-                    <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
-                        
-                        <div class="md:max-w-[220px] lg:max-w-xs">
-                            <h4 class="text-lg font-black text-secondary dark:text-purple-300 mb-1 tracking-tight">Newsletter</h4>
-                            <p class="text-xs text-slate-600 dark:text-purple-100/70 font-medium leading-relaxed">Industry news and talent alerts.</p>
-                        </div>
-
-                        <form class="flex-1 flex flex-col sm:flex-row gap-3">
-                            <input type="email" placeholder="Email address" 
-                                   class="flex-1 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-100 dark:border-purple-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all text-sm font-medium">
-                            <button class="bg-primary text-white px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-secondary transition-all shadow-lg shadow-primary/25 active:scale-95 whitespace-nowrap">
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
-                </div>
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <!-- Text Content: Fixed width at 1024px to prevent overlapping -->
+            <div class="lg:max-w-[200px] xl:max-w-xs">
+                <h4 class="text-lg font-semibold text-secondary dark:text-white mb-1 tracking-tight">
+                    Newsletter
+                </h4>
+                <p class="text-xs text-slate-600 dark:text-purple-100/70 font-normal leading-relaxed">
+                    Industry news and talent alerts.
+                </p>
             </div>
+
+            <!-- Form: Optimized for 1024px -->
+            <!-- Optimized Newsletter Form for 1024px -->
+<form class="flex-1 flex flex-col lg:flex-row gap-3 w-full">
+    <!-- Input: Scales font and padding for 1024px -->
+    <input type="email" 
+           placeholder="Email address" 
+           class="flex-1 min-w-0 px-4 xl:px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-100 dark:border-purple-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all text-[13px] xl:text-sm font-normal text-secondary dark:text-white placeholder:text-slate-400">
+    
+    <!-- Button: Compact padding at 1024px (lg) then expands at 1280px (xl) -->
+    <button class="bg-primary text-white 
+                   px-5 lg:px-4 xl:px-8 py-3.5 
+                   rounded-2xl font-semibold uppercase tracking-widest text-[10px] 
+                   hover:bg-secondary transition-all shadow-lg shadow-primary/25 
+                   active:scale-95 whitespace-nowrap">
+        Subscribe
+    </button>
+</form>
+        </div>
+    </div>
+</div>
 
         </div>
         
